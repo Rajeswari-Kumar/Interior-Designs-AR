@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Project files/Project scenes/Room designing scene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  m_configObjects:
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 58aadc5c3d170c64e918495f30a0fae6,
+      type: 2}
+    com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000,
+      guid: f79231e4bbe4dd144a35896be984b888, type: 2}
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000,
+      guid: 4edf5547e412a2c48a9cb99532efc1f5, type: 2}
+    com.unity.input.settings: {fileID: 11400000, guid: e6da99b84d4139844878c1bfd8840866,
+      type: 2}
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 94faafc021af0884f99e617bbb16295f,
+      type: 3}

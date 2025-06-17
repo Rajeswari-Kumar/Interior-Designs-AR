@@ -1,0 +1,94 @@
+{
+    "name": "Touch input system",
+    "maps": [
+        {
+            "name": "Touch",
+            "id": "ae6e441b-0242-4649-b000-dc88976e0c5d",
+            "actions": [
+                {
+                    "name": "Primary touch",
+                    "type": "Value",
+                    "id": "9b705133-18d3-4430-ba01-7e8a24b51628",
+                    "expectedControlType": "Touch",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Secondary touch",
+                    "type": "Value",
+                    "id": "2a4f06e5-be37-4f77-8290-0f3d2978f7d5",
+                    "expectedControlType": "Touch",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Gyro",
+                    "type": "PassThrough",
+                    "id": "df4b4c51-6ed5-4567-9f52-3c841d2d3b3d",
+                    "expectedControlType": "Quaternion",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Drag touch",
+                    "type": "Value",
+                    "id": "5b7dfaf7-f8a7-4e6c-8ddd-3b10d6377e4e",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "b428e0bf-5335-48d2-9c8e-65f208eb110f",
+                    "path": "<Touchscreen>/touch0",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Primary touch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5d46c20b-0ebc-4f8e-a68b-75007845194d",
+                    "path": "<Touchscreen>/touch1",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Secondary touch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "015823c3-2a8f-42d9-a26f-c208bb65e13b",
+                    "path": "<AttitudeSensor>/attitude",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gyro",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "75a343e3-5871-4260-8aff-398702f73b1a",
+                    "path": "<Touchscreen>/touch0/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Drag touch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
