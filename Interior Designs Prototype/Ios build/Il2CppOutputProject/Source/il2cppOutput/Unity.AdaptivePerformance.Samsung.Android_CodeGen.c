@@ -1,0 +1,165 @@
+﻿#include "pch-c.h"
+#ifndef _MSC_VER
+# include <alloca.h>
+#else
+# include <malloc.h>
+#endif
+
+
+#include "codegen/il2cpp-codegen-metadata.h"
+
+
+
+
+
+extern void UnitySourceGeneratedAssemblyMonoScriptTypes_v1_Get_m61070571B47F834599647D47BE2C70E651A12320 (void);
+extern void UnitySourceGeneratedAssemblyMonoScriptTypes_v1__ctor_mCA7E98FC3AAAAF268CE397048241DFE4F1E35CFA (void);
+extern void AdaptiveVariableRefreshRate_get_Name_mF8C08025C2614FAA00F1545EE340DFA951C561C0 (void);
+extern void AdaptiveVariableRefreshRate_get_Enabled_mD0C3364B0533C355A3A3EB26D552679F71755808 (void);
+extern void AdaptiveVariableRefreshRate_set_Enabled_m65B74C83EF4D8828A61B9EF174EDB36EC542B37D (void);
+extern void AdaptiveVariableRefreshRate_Awake_mFE8680AB2D8A192912C5A96FC14211D2DBB89A22 (void);
+extern void AdaptiveVariableRefreshRate_OnDisabled_m4D920248468848B9B22B226130A74865A7CCE40B (void);
+extern void AdaptiveVariableRefreshRate_OnEnabled_m22746B6382BB835B71C1762FEF1A392D5A491B80 (void);
+extern void AdaptiveVariableRefreshRate_OnDestroy_m7B555B16DF7CFECFD01D8C478FB4694155437045 (void);
+extern void AdaptiveVariableRefreshRate_RefreshRateChanged_mFF8AAB10FAD23ACDB2DFDE115BD96015AE9B5DFC (void);
+extern void AdaptiveVariableRefreshRate_OnLevelIncrease_m47AE80C1833D7191B6679CBF9AE7099A7EC35078 (void);
+extern void AdaptiveVariableRefreshRate_OnLevelDecrease_mA347DC91AA9491E9451BA5FAA164C39A05DE2983 (void);
+extern void AdaptiveVariableRefreshRate__ctor_m45F992D15709678C75D34B6D5F8FB008674E2C58 (void);
+extern void SamsungAndroidProviderLoader_get_Initialized_m078A4ABB081C677E761A2433A38ADC613C119E55 (void);
+extern void SamsungAndroidProviderLoader_get_Running_mBD9589810D1ADB3AEE69DFD46044D8DEB2C43DB4 (void);
+extern void SamsungAndroidProviderLoader_GetDefaultSubsystem_mD1D0DCFB80C6753B89AC9720C65FE76984B99520 (void);
+extern void SamsungAndroidProviderLoader_GetSettings_m8A0099932C135CE398515BF7482C43D894F22441 (void);
+extern void SamsungAndroidProviderLoader_Initialize_m5858C2F5E9FAAEE52409997159AD034C02064991 (void);
+extern void SamsungAndroidProviderLoader_Start_m6F124A52212118BBC82F0F5B534661CC348F8CC6 (void);
+extern void SamsungAndroidProviderLoader_Stop_m09649590212A34E95BC5C4F709C20D53CE95B66F (void);
+extern void SamsungAndroidProviderLoader_Deinitialize_mC01C17A4795C55BD72DADBDF7115BC90BCBD5BD0 (void);
+extern void SamsungAndroidProviderLoader__ctor_m2B6288D900467305274E822344CB000EC7B1420E (void);
+extern void SamsungAndroidProviderLoader__cctor_m0E47CB4911A6547C0314E08E62E072F66E25EAE6 (void);
+extern void SamsungAndroidProviderSettings_get_samsungProviderLogging_mE70D42A6A1439E3DB2406B298C2AF4F30811DA9C (void);
+extern void SamsungAndroidProviderSettings_set_samsungProviderLogging_m799B21694D0AE66CED86A06CCBFB24E4B322F37B (void);
+extern void SamsungAndroidProviderSettings_get_highSpeedVRR_mF7D7A276D6AC87D624429E128A5B36155ABCE4A1 (void);
+extern void SamsungAndroidProviderSettings_set_highSpeedVRR_mEBA299AB5B79E26FA9760EDB5DB357D1F51159F2 (void);
+extern void SamsungAndroidProviderSettings_get_automaticVRR_mA4EC43A6755953623F7A5F1B3C365A3A9CE25C3B (void);
+extern void SamsungAndroidProviderSettings_set_automaticVRR_m10FAA3C18EF7EF58166BB3D9A572B5D249584639 (void);
+extern void SamsungAndroidProviderSettings_Awake_mBE88FA41ECD3C5566F2E71A1FA500536653A0220 (void);
+extern void SamsungAndroidProviderSettings_GetSettings_m1049E50BEC709D010C89CB78635F11BAF183A4CB (void);
+extern void SamsungAndroidProviderSettings__ctor_m6BA5E84565C1FB2B7857B12FC7606CC78C1240E5 (void);
+extern void VariableRefreshRateEventHandler__ctor_m7A50456A08A0FDE7002210349CE4F2D9BF73EBF7 (void);
+extern void VariableRefreshRateEventHandler_Invoke_mA665080591D6EA72C7EC12CFC0CAFAC8E5FF37EC (void);
+extern void VariableRefreshRateEventHandler_BeginInvoke_m96B39CC25E1EA9D1C5BD5CD00D817CFBDC29C5A4 (void);
+extern void VariableRefreshRateEventHandler_EndInvoke_mA9620AD3877A7CAF092C68D0A97BFE556627B348 (void);
+extern void VariableRefreshRate_get_Instance_m450C4BACDE831B071DDC9573BD1FE24D4FA4BEEA (void);
+extern void VariableRefreshRate_set_Instance_m5F8051BFDE6E14BAC0C837E841B48D67590AB992 (void);
+static Il2CppMethodPointer s_methodPointers[43] = 
+{
+	UnitySourceGeneratedAssemblyMonoScriptTypes_v1_Get_m61070571B47F834599647D47BE2C70E651A12320,
+	UnitySourceGeneratedAssemblyMonoScriptTypes_v1__ctor_mCA7E98FC3AAAAF268CE397048241DFE4F1E35CFA,
+	AdaptiveVariableRefreshRate_get_Name_mF8C08025C2614FAA00F1545EE340DFA951C561C0,
+	AdaptiveVariableRefreshRate_get_Enabled_mD0C3364B0533C355A3A3EB26D552679F71755808,
+	AdaptiveVariableRefreshRate_set_Enabled_m65B74C83EF4D8828A61B9EF174EDB36EC542B37D,
+	AdaptiveVariableRefreshRate_Awake_mFE8680AB2D8A192912C5A96FC14211D2DBB89A22,
+	AdaptiveVariableRefreshRate_OnDisabled_m4D920248468848B9B22B226130A74865A7CCE40B,
+	AdaptiveVariableRefreshRate_OnEnabled_m22746B6382BB835B71C1762FEF1A392D5A491B80,
+	AdaptiveVariableRefreshRate_OnDestroy_m7B555B16DF7CFECFD01D8C478FB4694155437045,
+	AdaptiveVariableRefreshRate_RefreshRateChanged_mFF8AAB10FAD23ACDB2DFDE115BD96015AE9B5DFC,
+	AdaptiveVariableRefreshRate_OnLevelIncrease_m47AE80C1833D7191B6679CBF9AE7099A7EC35078,
+	AdaptiveVariableRefreshRate_OnLevelDecrease_mA347DC91AA9491E9451BA5FAA164C39A05DE2983,
+	AdaptiveVariableRefreshRate__ctor_m45F992D15709678C75D34B6D5F8FB008674E2C58,
+	SamsungAndroidProviderLoader_get_Initialized_m078A4ABB081C677E761A2433A38ADC613C119E55,
+	SamsungAndroidProviderLoader_get_Running_mBD9589810D1ADB3AEE69DFD46044D8DEB2C43DB4,
+	SamsungAndroidProviderLoader_GetDefaultSubsystem_mD1D0DCFB80C6753B89AC9720C65FE76984B99520,
+	SamsungAndroidProviderLoader_GetSettings_m8A0099932C135CE398515BF7482C43D894F22441,
+	SamsungAndroidProviderLoader_Initialize_m5858C2F5E9FAAEE52409997159AD034C02064991,
+	SamsungAndroidProviderLoader_Start_m6F124A52212118BBC82F0F5B534661CC348F8CC6,
+	SamsungAndroidProviderLoader_Stop_m09649590212A34E95BC5C4F709C20D53CE95B66F,
+	SamsungAndroidProviderLoader_Deinitialize_mC01C17A4795C55BD72DADBDF7115BC90BCBD5BD0,
+	SamsungAndroidProviderLoader__ctor_m2B6288D900467305274E822344CB000EC7B1420E,
+	SamsungAndroidProviderLoader__cctor_m0E47CB4911A6547C0314E08E62E072F66E25EAE6,
+	SamsungAndroidProviderSettings_get_samsungProviderLogging_mE70D42A6A1439E3DB2406B298C2AF4F30811DA9C,
+	SamsungAndroidProviderSettings_set_samsungProviderLogging_m799B21694D0AE66CED86A06CCBFB24E4B322F37B,
+	SamsungAndroidProviderSettings_get_highSpeedVRR_mF7D7A276D6AC87D624429E128A5B36155ABCE4A1,
+	SamsungAndroidProviderSettings_set_highSpeedVRR_mEBA299AB5B79E26FA9760EDB5DB357D1F51159F2,
+	SamsungAndroidProviderSettings_get_automaticVRR_mA4EC43A6755953623F7A5F1B3C365A3A9CE25C3B,
+	SamsungAndroidProviderSettings_set_automaticVRR_m10FAA3C18EF7EF58166BB3D9A572B5D249584639,
+	SamsungAndroidProviderSettings_Awake_mBE88FA41ECD3C5566F2E71A1FA500536653A0220,
+	SamsungAndroidProviderSettings_GetSettings_m1049E50BEC709D010C89CB78635F11BAF183A4CB,
+	SamsungAndroidProviderSettings__ctor_m6BA5E84565C1FB2B7857B12FC7606CC78C1240E5,
+	VariableRefreshRateEventHandler__ctor_m7A50456A08A0FDE7002210349CE4F2D9BF73EBF7,
+	VariableRefreshRateEventHandler_Invoke_mA665080591D6EA72C7EC12CFC0CAFAC8E5FF37EC,
+	VariableRefreshRateEventHandler_BeginInvoke_m96B39CC25E1EA9D1C5BD5CD00D817CFBDC29C5A4,
+	VariableRefreshRateEventHandler_EndInvoke_mA9620AD3877A7CAF092C68D0A97BFE556627B348,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	VariableRefreshRate_get_Instance_m450C4BACDE831B071DDC9573BD1FE24D4FA4BEEA,
+	VariableRefreshRate_set_Instance_m5F8051BFDE6E14BAC0C837E841B48D67590AB992,
+};
+static const int32_t s_InvokerIndices[43] = 
+{
+	8817,
+	6021,
+	5908,
+	5801,
+	4639,
+	6021,
+	6021,
+	6021,
+	6021,
+	6021,
+	6021,
+	6021,
+	6021,
+	5801,
+	5801,
+	5908,
+	5908,
+	5801,
+	5801,
+	5801,
+	5801,
+	6021,
+	8805,
+	5801,
+	4639,
+	5801,
+	4639,
+	5801,
+	4639,
+	6021,
+	8762,
+	6021,
+	2521,
+	6021,
+	1931,
+	4746,
+	0,
+	0,
+	0,
+	0,
+	0,
+	8762,
+	8606,
+};
+IL2CPP_EXTERN_C const Il2CppCodeGenModule g_Unity_AdaptivePerformance_Samsung_Android_CodeGenModule;
+const Il2CppCodeGenModule g_Unity_AdaptivePerformance_Samsung_Android_CodeGenModule = 
+{
+	"Unity.AdaptivePerformance.Samsung.Android.dll",
+	43,
+	s_methodPointers,
+	0,
+	NULL,
+	s_InvokerIndices,
+	0,
+	NULL,
+	0,
+	NULL,
+	0,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+};

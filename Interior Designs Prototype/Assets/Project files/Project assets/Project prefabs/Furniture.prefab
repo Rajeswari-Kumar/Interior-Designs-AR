@@ -162,6 +162,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.005
+  windowCanvas: {fileID: 0}
+  playerInput: {fileID: 0}
+  DragTouch:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Drag Touch
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 7d35d261-5200-4d5d-a685-ddcce28f3d13
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
 --- !u!114 &-2521897009217354963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,7 +188,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3dd346f27127134799dbaea3a33fae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasPrefab: {fileID: 6877098793403368488, guid: c6f89753398485a44a1a13d7da337b21, type: 3}
+  canvasPrefab: {fileID: 6877098793403368488, guid: c6f89753398485a44a1a13d7da337b21,
+    type: 3}
   canvasOffset: {x: 0, y: 2, z: 0}
+  glass: {fileID: 0}
   edgeSphereRadius: 0.025
   edgeSphereMaterial: {fileID: 0}

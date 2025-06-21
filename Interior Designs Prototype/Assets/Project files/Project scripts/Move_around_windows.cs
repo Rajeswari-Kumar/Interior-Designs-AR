@@ -16,7 +16,7 @@ public class Move_around_windows : MonoBehaviour
     public PlayerInput playerInput;
     public InputActionProperty DragTouch;
 
-
+    public Transform PlaneTransform;
     private void Start()
     {
         mainCamera = Camera.main;
@@ -29,6 +29,7 @@ public class Move_around_windows : MonoBehaviour
         inputManager = FindObjectOfType<InputManager>();
         playerInput = FindAnyObjectByType<PlayerInput>();
         //primaryTouch = playerInput.actions["Primary touch"];
+        PlaneTransform = FindObjectOfType<PlaneTrans>().transform;
     }
 
     private void Update()
@@ -61,6 +62,13 @@ public class Move_around_windows : MonoBehaviour
 
             Ray ray = mainCamera.ScreenPointToRay(touchPos);
             Transform wallTransform = transform.parent;
+
+            if (this.gameObject.name == "Sofa")
+            {
+                Debug.Log("A");
+                wallTransform = PlaneTransform;
+            }
+
             if (wallTransform == null) return;
 
             Plane wallPlane = new Plane(-wallTransform.forward, transform.position);

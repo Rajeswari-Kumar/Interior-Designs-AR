@@ -10,6 +10,7 @@ TagManager:
   - Wall
   - Window Canvas
   - Floor
+  - WallToggleButton
   layers:
   - Default
   - TransparentFX

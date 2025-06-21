@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -66,38 +66,31 @@ public class Height_Width_Display : MonoBehaviour
 
         foreach (GameObject window in keys)
         {
+            if (window == null)
+            {
+                // Window was destroyed → clean up canvas
+                if (windowToCanvasMap.TryGetValue(window, out GameObject canvas) && canvas != null)
+                {
+                    Destroy(canvas);
+                }
+
+                windowToCanvasMap.Remove(window);
+                windowReferencePoints.Remove(window);
+                continue;
+            }
+
             UpdateCanvasForWindow(window);
-
-            //if (window == null || windowToCanvasMap[window] == null)
-            //    continue;
-
-            //GameObject canvas = windowToCanvasMap[window];
-            //Vector3 scale = window.transform.lossyScale;
-            //float width = Mathf.Round(scale.x * 100f) / 100f;
-            //float height = Mathf.Round(scale.y * 100f) / 100f;
-
-            //foreach (Transform measure in canvas.transform)
-            //{
-            //    if (measure.name == "Height")
-            //        measure.GetComponent<TextMeshProUGUI>().text = "<----- " + height.ToString("F2") + "m ----->";
-            //    else if (measure.name == "Width")
-            //        measure.GetComponent<TextMeshProUGUI>().text = "<----- " + width.ToString("F2") + "m ----->";
-            //}
-
-            //if (windowReferencePoints.TryGetValue(window, out Transform refPoint) && refPoint != null)
-            //{
-            //    Vector3 forwardOffset = refPoint.forward.normalized * offset.z;
-            //    canvas.transform.position = refPoint.position + forwardOffset;
-            //}
         }
     }
+
     public void UpdateCanvasForWindow(GameObject window)
     {
         if (window == null || !windowToCanvasMap.ContainsKey(window))
             return;
-
+       
         GameObject canvas = windowToCanvasMap[window];
-
+        if (window == null)
+            Destroy(canvas);
         Vector3 scale = window.transform.localScale * 10;
         float width = Mathf.Round(scale.x * 100f) / 100f;
         float height = Mathf.Round(scale.y * 100f) / 100f;

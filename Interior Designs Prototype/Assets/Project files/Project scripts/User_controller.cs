@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Android;
 
 [RequireComponent(typeof(CharacterController))]
 public class User_controller : MonoBehaviour

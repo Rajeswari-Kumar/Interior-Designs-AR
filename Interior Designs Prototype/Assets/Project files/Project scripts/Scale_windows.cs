@@ -33,12 +33,21 @@ public class Scale_windows : MonoBehaviour
     {
         if (inputManager && inputManager.singleClickObjectSelect == gameObject)
         {
+            // Deselect previously selected window if any
+            if (currentSelectedWindow != null && currentSelectedWindow != this)
+            {
+                currentSelectedWindow.Deselect();
+            }
+
             if (currentSelectedWindow == this)
             {
-                Deselect();
+                Deselect(); // Toggle off
             }
-            isSelected = true;
-            currentSelectedWindow = this;
+            else
+            {
+                isSelected = true;
+                currentSelectedWindow = this;
+            }
         }
     }
 

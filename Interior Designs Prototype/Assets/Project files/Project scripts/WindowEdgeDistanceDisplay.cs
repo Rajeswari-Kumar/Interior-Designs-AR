@@ -38,7 +38,7 @@ public class WindowEdgeDistanceDisplay : MonoBehaviour
         }
 
         // Instantiate canvas
-        canvasInstance = Instantiate(canvasPrefab);
+        canvasInstance = Instantiate(canvasPrefab, new Vector3(0,-5f,0),Quaternion.identity);
         canvasInstance.GetComponent<Canvas>().sortingOrder = 10; // higher than main canvas
 
         canvasInstance.name = $"EdgeDistanceCanvas_{name}";
@@ -268,9 +268,9 @@ public class WindowEdgeDistanceDisplay : MonoBehaviour
         mat.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
         mat.renderQueue = 3000;
 
-        Color color = mat.color;
-        color.a = transparency;
-        mat.color = color;
+        //Color color = mat.color;
+        //color.a = transparency;
+        //mat.color = color;
         wallRenderer.material = glass;
     }
 

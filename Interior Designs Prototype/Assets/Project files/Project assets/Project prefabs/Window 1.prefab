@@ -183,6 +183,7 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
+  PlaneTransform: {fileID: 0}
 --- !u!114 &2430181035050548714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -493,6 +494,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 1135117109073337392, guid: 71e3003df51fe6a458a36f30e913d74e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2297939239296085154, guid: 71e3003df51fe6a458a36f30e913d74e,
         type: 3}
       propertyPath: m_BlockingMask.m_Bits
@@ -502,6 +508,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RaycastTriggerInteraction
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3725499636171613126, guid: 71e3003df51fe6a458a36f30e913d74e,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3725499636171613126, guid: 71e3003df51fe6a458a36f30e913d74e,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3725499636171613126, guid: 71e3003df51fe6a458a36f30e913d74e,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3725499636171613126, guid: 71e3003df51fe6a458a36f30e913d74e,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4134872761029575974, guid: 71e3003df51fe6a458a36f30e913d74e,
         type: 3}
@@ -613,10 +639,35 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 4977963026429865698, guid: 71e3003df51fe6a458a36f30e913d74e,
+        type: 3}
+      propertyPath: m_text
+      value: X
+      objectReference: {fileID: 0}
+    - target: {fileID: 4977963026429865698, guid: 71e3003df51fe6a458a36f30e913d74e,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4977963026429865698, guid: 71e3003df51fe6a458a36f30e913d74e,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5499137255494026394, guid: 71e3003df51fe6a458a36f30e913d74e,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.7798
+      objectReference: {fileID: 0}
     - target: {fileID: 5745972110105985808, guid: 71e3003df51fe6a458a36f30e913d74e,
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5745972110105985808, guid: 71e3003df51fe6a458a36f30e913d74e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6093610503815881675, guid: 71e3003df51fe6a458a36f30e913d74e,
         type: 3}
@@ -631,7 +682,7 @@ PrefabInstance:
     - target: {fileID: 6093610503815881675, guid: 71e3003df51fe6a458a36f30e913d74e,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6131442739362770931, guid: 71e3003df51fe6a458a36f30e913d74e,
         type: 3}
@@ -717,7 +768,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -763,7 +814,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -809,7 +860,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -844,7 +895,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8952652517752484002}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0e315bdb99decc4e8b35e35c8c196ea, type: 3}
   m_Name: 

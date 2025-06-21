@@ -12,7 +12,7 @@ public class InputManager : MonoBehaviour
 
     public bool doubleClicked = false;
     public Ray ray; // Public ray for both single and double click
-    public RaycastHit Hit;
+    public Vector3 Hit;
 
     private Renderer previousRenderer;
     private Color originalColor;
@@ -82,8 +82,8 @@ public class InputManager : MonoBehaviour
 
             float currentTapTime = Time.time;
             ray = mainCamera.ScreenPointToRay(lastTouchPosition);
-            Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red, 2f);
-
+            //Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red, 2f);
+           
             if (currentTapTime - lastClickTime <= doubleClickThreshold)
             {
                 doubleClicked = true;
@@ -105,6 +105,7 @@ public class InputManager : MonoBehaviour
     {
         if (Physics.Raycast(ray, out RaycastHit hit, 100f))
         {
+            Hit = hit.point;
             if (isDoubleClick && hit.transform.CompareTag("Window"))
             {
                 // Revert previous color first
@@ -125,6 +126,12 @@ public class InputManager : MonoBehaviour
 
                 previousRenderer = renderer;
 
+                singleClickObjectSelect = null;
+            }
+
+            else if (isDoubleClick && hit.transform.CompareTag("Wall"))
+            {
+                doubleClickObjectSelect = hit.transform.gameObject;
                 singleClickObjectSelect = null;
             }
             else if (!isDoubleClick && hit.transform.CompareTag("Window"))
@@ -169,23 +176,25 @@ public class InputManager : MonoBehaviour
                 }
                 else
                 {
-                    singleClickObjectSelect = hit.transform.gameObject;
                     
+                    singleClickObjectSelect = hit.transform.gameObject;
                     doubleClickObjectSelect = null;
                 }
             }
-            else if (!isDoubleClick && hit.transform.CompareTag("Floor"))
+            else if (hit.transform.CompareTag("Fixture template"))
             {
-                if (singleClickObjectSelect == hit.transform.gameObject)
-                {
-                    singleClickObjectSelect = null;
-                }
-                else
-                {
-                    singleClickObjectSelect = hit.transform.gameObject;
+                singleClickObjectSelect = hit.transform.gameObject;
+                Renderer renderer = singleClickObjectSelect.GetComponent<Renderer>();
 
-                    doubleClickObjectSelect = null;
-                }
+                // Store original color
+                originalColor = renderer.material.color;
+
+                // Highlight in cyan
+                renderer.material.color = Color.cyan;
+                Debug.Log("fixture template");
+                previousRenderer = renderer;
+
+                doubleClickObjectSelect = null;
             }
             else
             {

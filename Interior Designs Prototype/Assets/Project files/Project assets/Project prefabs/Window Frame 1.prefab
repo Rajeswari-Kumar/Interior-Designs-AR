@@ -314,6 +314,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas H-W
       objectReference: {fileID: 0}
+    - target: {fileID: 2993941363334402414, guid: f0f1312a35d2fe8439381cda927e5725,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4081080582451726805, guid: f0f1312a35d2fe8439381cda927e5725,
         type: 3}
       propertyPath: m_Pivot.x
@@ -506,6 +511,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Window_Frame_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4233675689124066259, guid: 41362ea2471069d4981db5b08ced6b5f,
+        type: 3}
+      propertyPath: DragTouch.m_Action.m_Name
+      value: Drag Touch
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

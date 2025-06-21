@@ -1,104 +1,121 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class Furniture_mover : MonoBehaviour
+public class FurnitureMover : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 0.005f;
-    private bool isSelected = false;
+    [SerializeField] private float rotationSpeed = 2f;
+
     private Camera mainCamera;
-    private Vector2 lastTouchPosition;
+    private InputManager inputManager;
+    private WindowEdgeDistanceDisplay edgeDisplay;
+
+    [SerializeField] private Transform groundPlaneTransform;
+
+    private Vector2 prevTouch0, prevTouch1;
+    private bool wasTwoFingerTouchLastFrame = false;
 
     private void Start()
     {
         mainCamera = Camera.main;
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+        inputManager = FindObjectOfType<InputManager>();
+        edgeDisplay = GetComponent<WindowEdgeDistanceDisplay>();
+
+        if (groundPlaneTransform == null)
+        {
+            PlaneTrans plane = FindObjectOfType<PlaneTrans>();
+            if (plane != null)
+                groundPlaneTransform = plane.transform;
+        }
     }
 
     private void Update()
     {
-       // HandleMouseSelection();
+        HandleFurnitureTouchDragOrRotate();
+    }
+
+    private void HandleFurnitureTouchDragOrRotate()
+    {
+        if (Touchscreen.current == null)
+            return;
+
+        int touchCount = 0;
+        foreach (var touch in Touchscreen.current.touches)
+        {
+            if (touch.press.isPressed)
+                touchCount++;
+        }
+
+        bool isSelected = (inputManager && inputManager.singleClickObjectSelect == gameObject);
+
+        if (touchCount == 2 && isSelected)
+        {
+            HandleTwoFingerRotation();
+            return;
+        }
+        else
+        {
+            wasTwoFingerTouchLastFrame = false;
+        }
+
+        // Handle dragging
         if (isSelected)
-            //MoveWithMouse();
-
-        HandleTouchSelection();
-        if (isSelected)
-            MoveWithTouch();
-
-    }
-
-    // 🖱️ PC: Mouse-based selection
-    void HandleMouseSelection()
-    {
-        if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit))
+            Vector2 touchPos = Touchscreen.current.primaryTouch.position.ReadValue();
+            Ray ray = mainCamera.ScreenPointToRay(touchPos);
+
+            if (groundPlaneTransform == null)
+                return;
+
+            Plane groundPlane = new Plane(Vector3.up, groundPlaneTransform.position);
+            if (groundPlane.Raycast(ray, out float enter))
             {
-                if (hit.transform == transform)
-                {
-                    isSelected = !isSelected;
-                    GetComponent<Renderer>().material.color = Color.yellow;
-                }
-                else
-                {
-                    isSelected = false;
-                }
+                Vector3 hitPoint = ray.GetPoint(enter);
+                transform.position = new Vector3(hitPoint.x, groundPlaneTransform.position.y, hitPoint.z);
             }
-            else
-            {
-                isSelected = false;
-            }
+
+            if (edgeDisplay)
+                edgeDisplay.UpdateCanvasAndLines();
+        }
+
+        // Double-click delete
+        if (inputManager && inputManager.doubleClickObjectSelect == gameObject)
+        {
+            Destroy(gameObject);
         }
     }
 
-    void MoveWithMouse()
+    private void HandleTwoFingerRotation()
     {
-        float mouseX = Input.GetAxis("Mouse X");
-        float mouseY = Input.GetAxis("Mouse Y");
+        var touches = Touchscreen.current.touches;
+        var activeTouches = new System.Collections.Generic.List<UnityEngine.InputSystem.Controls.TouchControl>();
 
-        Vector3 moveDirection = new Vector3(mouseX, 0, mouseY);
-        transform.localPosition += moveDirection * moveSpeed;
-    }
-
-    // 📱 Mobile: Touch-based selection
-    void HandleTouchSelection()
-    {
-        if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began)
+        foreach (var t in touches)
         {
-            Touch touch = Input.GetTouch(0);
-            Ray ray = mainCamera.ScreenPointToRay(touch.position);
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                if (hit.transform == transform)
-                {
-                    isSelected = !isSelected;
-                    GetComponent<Renderer>().material.color = Color.yellow;
-                }
-                else
-                {
-                    isSelected = false;
-                }
-            }
-            else
-            {
-                isSelected = false;
-            }
+            if (t.press.isPressed)
+                activeTouches.Add(t);
         }
-    }
 
-    void MoveWithTouch()
-    {
-        if (Input.touchCount == 1)
+        if (activeTouches.Count < 2) return;
+
+        Vector2 currentTouch0 = activeTouches[0].position.ReadValue();
+        Vector2 currentTouch1 = activeTouches[1].position.ReadValue();
+
+        if (!wasTwoFingerTouchLastFrame)
         {
-            Touch touch = Input.GetTouch(0);
-
-            if (touch.phase == TouchPhase.Moved)
-            {
-                Vector2 delta = touch.deltaPosition;
-
-                Vector3 moveDirection = new Vector3(delta.x, 0, delta.y);
-                transform.localPosition += moveDirection * moveSpeed * Time.deltaTime;
-            }
+            prevTouch0 = currentTouch0;
+            prevTouch1 = currentTouch1;
+            wasTwoFingerTouchLastFrame = true;
+            return;
         }
+
+        Vector2 prevVector = prevTouch1 - prevTouch0;
+        Vector2 currentVector = currentTouch1 - currentTouch0;
+
+        float angleDelta = Vector2.SignedAngle(prevVector, currentVector);
+        transform.Rotate(Vector3.up, angleDelta * rotationSpeed, Space.World);
+
+        prevTouch0 = currentTouch0;
+        prevTouch1 = currentTouch1;
     }
 }

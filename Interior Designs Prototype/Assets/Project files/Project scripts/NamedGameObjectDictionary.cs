@@ -77,88 +77,82 @@ public class NamedGameObjectDictionary : MonoBehaviour
     }
     private void HandleSelection()
     {
+        GameObject clickedObject = null;
+        bool isDoubleClick = false;
 
         if (inputManager && inputManager.doubleClickObjectSelect != null)
         {
-           
-               GameObject clickedObject = inputManager.doubleClickObjectSelect;
+            clickedObject = inputManager.doubleClickObjectSelect;
+            if(clickedObject.CompareTag("Fixture template"))
+                inputManager.doubleClickObjectSelect = null;
 
-                bool isDoubleClick = (clickedObject == lastClickedObject && Time.time - inputManager.lastClickTime < inputManager.doubleClickThreshold);
-                lastClickTime = Time.time;
-                lastClickedObject = clickedObject;
-            //selectedWindow = clickedObject;
-            if (isDoubleClick && clickedObject == selectedFixturePoint)
-            {
-                // Handle double-tap or double-click
-                DeleteFixturePoint();
-                return;
-            }
-            else if (isDoubleClick && clickedObject != selectedFixturePoint)
-            {
-                // Handle single-tap or single-click
-                ProcessRaycast(inputManager.Hit.point, clickedObject);
-            }
+            isDoubleClick = (clickedObject == lastClickedObject && Time.time - lastClickTime < doubleClickThreshold);
+        }
+        else if (inputManager && inputManager.singleClickObjectSelect != null)
+        {
+            clickedObject = inputManager.singleClickObjectSelect;
+            if (clickedObject.CompareTag("Fixture template"))
+                inputManager.singleClickObjectSelect = null;
+
+            isDoubleClick = (clickedObject == lastClickedObject && Time.time - lastClickTime < doubleClickThreshold);
         }
 
+        if (clickedObject != null)
+        {
+            lastClickTime = Time.time;
+            lastClickedObject = clickedObject;
 
+            ProcessRaycast(inputManager.Hit, clickedObject, isDoubleClick);
+        }
     }
 
 
 
 
-    private void ProcessRaycast(Vector3 hit, GameObject window)
+    private void ProcessRaycast(Vector3 hit, GameObject clickedObj, bool isDoubleClick)
     {
-            GameObject clickedObj = window;
-            // --- Double-click check (only meaningful on PC, ignored on mobile) ---
-            bool isDoubleClick = (clickedObj == lastClickedObject && Time.time - inputManager.lastClickTime < inputManager.doubleClickThreshold);
-            lastClickTime = Time.time;
-            lastClickedObject = clickedObj;
-
-            if (isDoubleClick && clickedObj == selectedFixturePoint)
+        if (clickedObj == selectedFixturePoint)
+        {
+            if (isDoubleClick)
             {
                 DeleteFixturePoint();
-                return;
             }
-
-            if (clickedObj == selectedFixturePoint)
-            {
-                DeselectFixturePoint();
-                return;
-            }
-            else if (clickedObj.CompareTag("Fixture template"))
-            {
-                SelectFixturePoint(clickedObj);
-                return;
-            }
-
-            if (isFixturePointSelected)
-            {
-                Debug.Log("Fixture point selected — no new fixture points can be created.");
-                return;
-            }
-
-            if (clickedObj.CompareTag("Window"))
-            {
-                SelectWindow(clickedObj);
-                return;
-            }
-
-            if (clickedObj.CompareTag("Wall") || clickedObj.CompareTag("Floor"))
-            {
-                SpawnFixturePoint(hit, clickedObj.transform);
-                Debug.Log("spwan fixture point");
-                return;
-            }
-
-            if (selectedWindow != null)
-            {
-                DeselectWindow();
-            }
-            if (isFixturePointSelected)
+            else
             {
                 DeselectFixturePoint();
             }
-        
+            return;
+        }
+
+        if (clickedObj.CompareTag("Fixture template"))
+        {
+            SelectFixturePoint(clickedObj);
+            return;
+        }
+
+        if (isFixturePointSelected)
+        {
+            Debug.Log("Fixture point already selected — cannot create another.");
+            return;
+        }
+
+        if (clickedObj.CompareTag("Window"))
+        {
+            SelectWindow(clickedObj);
+            return;
+        }
+
+        if (clickedObj.CompareTag("Wall") || clickedObj.CompareTag("Floor"))
+        {
+            SpawnFixturePoint(hit, clickedObj.transform);
+            return;
+        }
+
+        if (selectedWindow != null)
+            DeselectWindow();
+
+        if (isFixturePointSelected)
+            DeselectFixturePoint();
     }
 
 
@@ -167,8 +161,8 @@ public class NamedGameObjectDictionary : MonoBehaviour
     /// </summary>
     public void SpawnObjects(string objectName)
     {
-        Camera cam = Camera.main;
-        Vector3 spawnPosition = cam.transform.position + cam.transform.forward * 2f;
+        
+        Vector3 spawnPosition = new Vector3(0,1,0);
         Instantiate(GetObjectByName(objectName), spawnPosition, Quaternion.identity);
     }
 
@@ -191,20 +185,40 @@ public class NamedGameObjectDictionary : MonoBehaviour
             return;
         }
 
-        Vector3 position = selectedWindow.transform.position + (selectedWindow.CompareTag("Window") ? new Vector3(0, -2f, 0.5f) : new Vector3(0, 0, 0));
+        Vector3 position = selectedWindow.transform.position +
+                           (selectedWindow.CompareTag("Window") || selectedWindow.CompareTag("Fixture template")
+                               ? new Vector3(0, -2f, 0.5f)
+                               : Vector3.zero);
+
         Quaternion rotation = selectedWindow.transform.rotation;
-        Vector3 scaleWindow = selectedWindow.transform.localScale;
         Transform parent = selectedWindow.transform.parent;
 
+        // Cache current tag before destroying
+        string tag = selectedWindow.tag;
+
+        // Destroy the old one
         Destroy(selectedWindow);
 
-        GameObject newWindow = Instantiate(replacementPrefab, position, rotation, parent);
-        newWindow.transform.localScale = scaleWindow;
-        selectedWindow = newWindow;
+        GameObject newWindow;
 
+        if (tag == "Fixture template")
+        {
+            // Instantiate without parenting first to preserve original rotation and scale
+            newWindow = Instantiate(replacementPrefab, position, replacementPrefab.transform.rotation);
+            newWindow.transform.SetParent(parent, worldPositionStays: true); // maintain world position and scale
+        }
+        else
+        {
+            // For non-fixture templates, preserve the old scale and rotation
+            newWindow = Instantiate(replacementPrefab, position, rotation, parent);
+            newWindow.transform.localScale = selectedWindow != null ? selectedWindow.transform.localScale : Vector3.one;
+        }
+
+        selectedWindow = newWindow;
         Debug.Log($"Replaced window with '{newObjectName}'");
         isFixturePointSelected = false;
     }
+
 
     /// <summary>
     /// Called from UI button.
@@ -260,7 +274,7 @@ public class NamedGameObjectDictionary : MonoBehaviour
         Renderer rend = selectedWindow.GetComponent<Renderer>();
         if (rend != null && hasOriginalColor)
         {
-            rend.material.color = Color.white;
+            //rend.material.color = Color.white;
             Debug.Log($"Deselected window: {selectedWindow.name}");
         }
 
@@ -278,24 +292,27 @@ public class NamedGameObjectDictionary : MonoBehaviour
     /// </summary>
     public void SelectFixturePoint(GameObject fixturePoint)
     {
-        if (selectedFixturePoint != null && selectedFixturePoint != fixturePoint)
+        if (selectedFixturePoint == fixturePoint)
         {
-            DeselectFixturePoint(); // Deselect previous
+            DeselectFixturePoint(); // Toggle off
+            return;
+        }
+
+        if (selectedFixturePoint != null)
+        {
+            DeselectFixturePoint();
         }
 
         selectedFixturePoint = fixturePoint;
 
-        // Highlight selected fixture point (change color or scale)
         Renderer rend = selectedFixturePoint.GetComponent<Renderer>();
         if (rend != null)
-        {
-            rend.material.color = Color.green; // example highlight color
-        }
+            rend.material.color = Color.green;
 
         isFixturePointSelected = true;
-
-        //Debug.Log($"Selected fixture point: {selectedFixturePoint.name}");
         selectedWindow = fixturePoint;
+
+        Debug.Log("Fixture point selected");
     }
 
     /// <summary>
@@ -346,7 +363,7 @@ public class NamedGameObjectDictionary : MonoBehaviour
     //}
     public void SpawnFixturePoint(Vector3 position, Transform parent)
     {
-        if (isFixturePointSelected == false)
+        if (templateFixture && isFixturePointSelected == false)
         {
             if (selectedFixturePoint != null)
                 Destroy(selectedFixturePoint); // Replace previous
@@ -360,9 +377,7 @@ public class NamedGameObjectDictionary : MonoBehaviour
             // Step 3: Reset local scale
             selectedFixturePoint.transform.localScale = fixtureMarkerPrefab.transform.localScale;
             Debug.Log("aaa");
-            //selectedFixturePoint.transform.localScale = fixtureOriginalLocalScale;
-
-
+            //selectedFixturePoint.transform.localScale = fixtureOriginalLocalScale
         }
     }
 
