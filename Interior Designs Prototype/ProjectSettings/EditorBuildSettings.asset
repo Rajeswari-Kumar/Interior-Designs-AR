@@ -9,9 +9,6 @@ EditorBuildSettings:
     path: Assets/Project files/Project scenes/Start scene.unity
     guid: 15d587b01632c7b4c8451429b7bc0900
   - enabled: 1
-    path: Assets/Project files/Project scenes/Wall designing scene.unity
-    guid: 30789ba6de91ed14bbc613e9ab792aa6
-  - enabled: 1
     path: Assets/Project files/Project scenes/Room designing scene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects:
